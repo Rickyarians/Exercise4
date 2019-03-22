@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Exercise 3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
+            
+            <div class="table-responsive">
+                    <table class="table" id="tableplanet">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Rotation</th>
+                                <th scope="col">Orbital</th>
+                                <th scope="col">Diameter</th>
+                                <th scope="col">climate</th>
+                                <th scope="col">Gravity</th>
+                                <th scope="col">Terrain</th>
+                                <th scope="col">Surface Master</th>
+                                <th scope="col">Population</th>
+                                <th scope="col">Residents</th>
+                              </tr>
+                            </thead>
+                            <tbody id="myUL">
+                              
+                            </tbody>
+                          </table>
+                          
+                        
+            </div>
+    </div>
+  
+
+    <script>
+     $(document).ready(function () {
+            buatTable();
+        });
+
+
+        function buatTable() {
+            var sumbersari = "https://swapi.co/api/planets/?format=json";
+            $.ajax({
+                url: sumbersari,
+                data: "",
+                dataType: "json",
+                success: function (atang) {
+                    var planets = atang.results;
+                    var isitable = "";
+                    for (let i = 0; i < planets.length; i++) {
+                        isitable = `${isitable} <tr>
+                        <td>${planets[i].name}</td>
+                        <td>${planets[i].rotation_period}</td>
+                        <td>${planets[i].orbital_period}</td>
+                        <td>${planets[i].diameter}</td>
+                        <td>${planets[i].climate}</td>
+                        <td>${planets[i].gravity}</td>
+                        <td>${planets[i].terrain}</td>
+                        <td>${planets[i].surface_water}</td>
+                        <td>${planets[i].population}</td>
+                        <td>${planets[i].residents}</td>
+                        </tr>`;
+                    }
+                    $("#tableplanet tbody").html(isitable);
+                    $('#tableplanet').DataTable();
+                },
+            })
+        }
+
+     
+</script>
+  
+</body>
+
+</html>
